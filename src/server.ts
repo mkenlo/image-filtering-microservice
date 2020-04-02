@@ -15,12 +15,14 @@ import { filterImageFromURL, deleteLocalFiles, isValidUrl } from "./util/util";
   app.get("/filteredimage", async (req, res) => {
     if (Object.keys(req.query).length != 0) {
       if ("image_url" in req.query && isValidUrl(req.query.image_url)) {
-        let result = await filterImageFromURL(req.query.image_url).catch(e => {
-          res.status(404).json({
-            error: `Could  not fetch resource  <${req.query.image_url}>`
+        filterImageFromURL(req.query.image_url)
+          .then(result => res.sendFile(result))
+          .catch(e => {
+            res.status(404).json({
+              error: `Could  not fetch resource  <${req.query.image_url}>`
+            });
           });
-        });
-        res.sendFile(result);
+        // res.sendFile(result);
       } else {
         res.status(400).json({
           error: `Bad request. Invalid Query Param. Invalid Query Value`
