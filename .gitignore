@@ -1,0 +1,12 @@
+node_modules/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Build folder
+www/
+
+# Request's response tmp files
+src/util/tmp/
